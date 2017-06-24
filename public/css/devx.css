@@ -129,3 +129,7 @@ h1, h2, h3, h4, h5{
 .markdown:not(code) pre code, .markdown:not(code) pre tt{
   color: #9CA6AE;
 }
+
+.ui.form .field>label{
+  color: #5b6c78;
+}

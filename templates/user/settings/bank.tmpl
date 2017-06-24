@@ -1,0 +1,72 @@
+{{template "base/head" .}}
+<div class="user settings profile">
+	<div class="ui container">
+		<div class="ui grid">
+			{{template "user/settings/navbar" .}}
+			<div class="twelve wide column content">
+				{{template "base/alert" .}}
+				<h4 class="ui top attached header">
+					{{.i18n.Tr "settings.bank"}}
+				</h4>
+				<div class="ui attached segment">
+					<p>{{.i18n.Tr "settings.bank_desc"}}</p>
+					<form class="ui form" action="{{.Link}}" method="post">
+						{{.CSRFTokenHTML}}
+						<div class="required field {{if .Err_MobileNumber}}error{{end}}">
+							<label for="mobile_number">{{.i18n.Tr "mobile_number"}}</label>
+							<input id="mobile_number" name="mobile_number" value="{{.mobile_number}}" autofocus required>
+						</div>
+						<div class="field {{if .Err_BeneficiaryName}}error{{end}}">
+							<label for="beneficiary_name">{{.i18n.Tr "settings.beneficiary_name"}}</label>
+							<input id="beneficiary_name" name="beneficiary_name" value="{{.beneficiary_name}}" required>
+						</div>
+						<div class="field {{if .Err_BankName}}error{{end}}">
+							<label for="bank_name">{{.i18n.Tr "settings.bank_name"}}</label>
+							<input id="bank_name" name="bank_name" value="{{.bank_name}}" required>
+						</div>
+						<div class="field {{if .Err_BankCountry}}error{{end}}">
+							<label for="bank_country">{{.i18n.Tr "settings.bank_country"}}</label>
+							<input id="bank_country" name="bank_country" value="{{.bank_country}}" required>
+						</div>
+						<div class="field {{if .Err_BankCity}}error{{end}}">
+							<label for="bank_city">{{.i18n.Tr "settings.bank_city"}}</label>
+							<input id="bank_city" name="bank_city" value="{{.bank_city}}" required>
+						</div>
+						<div class="field {{if .Err_BankBranch}}error{{end}}">
+							<label for="bank_branch">{{.i18n.Tr "settings.bank_branch"}}</label>
+							<input id="bank_branch" name="bank_branch" value="{{.bank_branch}}" required>
+						</div>
+						<div class="field {{if .Err_SwiftCode}}error{{end}}">
+							<label for="swift_code">{{.i18n.Tr "settings.swift_code"}}</label>
+							<input id="swift_code" name="swift_code" value="{{.swift_code}}" required>
+						</div>
+						<div class="field {{if .Err_AccountNumber}}error{{end}}">
+							<label for="account_number">{{.i18n.Tr "settings.account_number"}}</label>
+							<input id="account_number" name="account_number" value="{{.account_number}}" required>
+						</div>
+						<div class="field {{if .Err_IBAN}}error{{end}}">
+							<label for="iban">{{.i18n.Tr "settings.iban"}}</label>
+							<input id="iban" name="iban" value="{{.iban}}" required>
+						</div>
+						<div class="field {{if .Err_AccountCurrency}}error{{end}}">
+							<label for="account_currency">{{.i18n.Tr "settings.account_currency"}}</label>
+							<input id="account_currency" name="account_currency" value="{{.account_currency}}" required>
+						</div>
+						<div class="field {{if .Err_IntermediaryBank}}error{{end}}">
+							<label for="intermediary_bank">{{.i18n.Tr "settings.intermediary_bank"}}</label>
+							<input id="intermediary_bank" name="intermediary_bank" value="{{.intermediary_bank}}" >
+						</div>
+						<div class="field {{if .Err_RoutingNumber}}error{{end}}">
+							<label for="routing_number">{{.i18n.Tr "settings.routing_number"}}</label>
+							<input id="routing_number" name="routing_number" value="{{.routing_number}}" >
+						</div>
+						<div class="field">
+							<button class="ui green button">{{$.i18n.Tr "settings.update_profile"}}</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{template "base/footer" .}}

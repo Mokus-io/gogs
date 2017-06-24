@@ -176,6 +176,19 @@ func SettingsAvatarPost(c *context.Context, f form.Avatar) {
 func SettingsBank(c *context.Context) {
 	c.Title("settings.bank")
 	c.PageIs("SettingsBank")
+	c.Data["beneficiary_name"] = c.User.BeneficiaryName
+	c.Data["mobile_number"] = c.User.MobileNumber
+	c.Data["bank_name"] = c.User.BankName
+	c.Data["bank_country"] = c.User.BankCountry
+	c.Data["bank_city"] = c.User.BankCity
+	c.Data["bank_branch"] = c.User.BankBranch
+	c.Data["swift_code"] = c.User.SwiftCode
+	c.Data["account_number"] = c.User.AccountNumber
+	c.Data["iban"] = c.User.IBAN
+	c.Data["account_currency"] = c.User.AccountCurrency
+	c.Data["intermediary_bank"] = c.User.IntermediaryBank
+	c.Data["routing_number"] = c.User.RoutingNumber
+
 	c.Success(SETTINGS_BANK)
 }
 
@@ -197,6 +210,7 @@ func SettingsBankPost(c *context.Context, f form.Bank) {
 
 		if err := models.UpdateUser(c.User); err != nil {
 			c.ServerError("UpdateUser", err)
+			c.Flash.Error(fmt.Sprintf("UpdateUser: %v", err))
 			return
 		}
 

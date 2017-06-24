@@ -114,7 +114,7 @@ type User struct {
 	IBAN		string
 	AccountCurrency		string //maybe here needs to be currency options
 	IntermediaryBank	string
-	RoutingNumber		string 
+	RoutingNumber		string
 
 
 }

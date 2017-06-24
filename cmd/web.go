@@ -206,6 +206,8 @@ func runWeb(c *cli.Context) error {
 	m.Group("/user/settings", func() {
 		m.Get("", user.Settings)
 		m.Post("", bindIgnErr(form.UpdateProfile{}), user.SettingsPost)
+		m.Get("/bank", user.SettingsBank)
+		m.Post("/bank", bindIgnErr(form.Bank{}), user.SettingsBankPost)
 		m.Combo("/avatar").Get(user.SettingsAvatar).
 			Post(binding.MultipartForm(form.Avatar{}), user.SettingsAvatarPost)
 		m.Post("/avatar/delete", user.SettingsDeleteAvatar)
