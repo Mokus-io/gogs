@@ -29,6 +29,7 @@ import (
 
 const (
 	SETTINGS_PROFILE                   = "user/settings/profile"
+	SETTINGS_BANK											 = "user/settings/bank"
 	SETTINGS_AVATAR                    = "user/settings/avatar"
 	SETTINGS_PASSWORD                  = "user/settings/password"
 	SETTINGS_EMAILS                    = "user/settings/email"
@@ -52,6 +53,7 @@ func Settings(c *context.Context) {
 	c.Data["email"] = c.User.Email
 	c.Data["website"] = c.User.Website
 	c.Data["location"] = c.User.Location
+	c.Data["skype"] = c.User.Skype
 	c.Success(SETTINGS_PROFILE)
 }
 
@@ -102,6 +104,8 @@ func SettingsPost(c *context.Context, f form.UpdateProfile) {
 	c.User.Email = f.Email
 	c.User.Website = f.Website
 	c.User.Location = f.Location
+	c.User.Skype = f.Skype
+
 	if err := models.UpdateUser(c.User); err != nil {
 		c.ServerError("UpdateUser", err)
 		return
@@ -168,6 +172,41 @@ func SettingsAvatarPost(c *context.Context, f form.Avatar) {
 
 	c.SubURLRedirect("/user/settings/avatar")
 }
+
+func SettingsBank(c *context.Context) {
+	c.Title("settings.bank")
+	c.PageIs("SettingsBank")
+	c.Success(SETTINGS_BANK)
+}
+
+func SettingsBankPost(c *context.Context, f form.Bank) {
+
+		c.User.BeneficiaryName = f.BeneficiaryName
+		c.User.MobileNumber = f.MobileNumber
+		c.User.BankName = f.BankName
+		c.User.BankCountry = f.BankCountry
+		c.User.BankCity = f.BankCity
+		c.User.BankBranch = f.BankBranch
+		c.User.SwiftCode = f.SwiftCode
+		c.User.AccountNumber = f.AccountNumber
+		c.User.IBAN = f.IBAN
+		c.User.AccountCurrency = f.AccountCurrency
+		c.User.IntermediaryBank = f.IntermediaryBank
+		c.User.RoutingNumber = f.RoutingNumber
+
+
+		if err := models.UpdateUser(c.User); err != nil {
+			c.ServerError("UpdateUser", err)
+			return
+		}
+
+		c.Flash.Success(c.Tr("settings.update_profile_success"))
+
+		c.SubURLRedirect("/user/settings/bank")
+
+}
+
+
 
 func SettingsDeleteAvatar(c *context.Context) {
 	if err := c.User.DeleteAvatar(); err != nil {

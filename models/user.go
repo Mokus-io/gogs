@@ -50,6 +50,7 @@ type User struct {
 	FullName  string
 	// Email is the primary email address (to be used for communication)
 	Email       string `xorm:"NOT NULL"`
+	IsEmailPublic	  bool
 	Passwd      string `xorm:"NOT NULL"`
 	LoginType   LoginType
 	LoginSource int64 `xorm:"NOT NULL DEFAULT 0"`
@@ -60,6 +61,8 @@ type User struct {
 	Repos       []*Repository `xorm:"-"`
 	Location    string
 	Website     string
+	Skype				string
+	Bio 				string
 	Rands       string `xorm:"VARCHAR(10)"`
 	Salt        string `xorm:"VARCHAR(10)"`
 
@@ -90,6 +93,7 @@ type User struct {
 	NumFollowing int `xorm:"NOT NULL DEFAULT 0"`
 	NumStars     int
 	NumRepos     int
+	Score				 float64 `xorm:"NOT NULL DEFAULT 0.0"`
 
 	// For organization
 	Description string
@@ -97,6 +101,22 @@ type User struct {
 	NumMembers  int
 	Teams       []*Team `xorm:"-"`
 	Members     []*User `xorm:"-"`
+
+	// Bank and payment details
+	BeneficiaryName  string
+	MobileNumber	string
+	BankName		string
+	BankCountry 	string
+	BankCity			string
+	BankBranch 		string
+	SwiftCode			string
+	AccountNumber		int
+	IBAN		string
+	AccountCurrency		string //maybe here needs to be currency options
+	IntermediaryBank	string
+	RoutingNumber		string 
+
+
 }
 
 func (u *User) BeforeInsert() {
@@ -559,6 +579,7 @@ func CreateUser(u *User) (err error) {
 	u.LowerName = strings.ToLower(u.Name)
 	u.AvatarEmail = u.Email
 	u.Avatar = tool.HashEmail(u.AvatarEmail)
+	u.Score = 0.0
 	if u.Rands, err = GetUserSalt(); err != nil {
 		return err
 	}

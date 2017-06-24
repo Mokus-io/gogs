@@ -11,7 +11,7 @@
 	<meta name="referrer" content="no-referrer" />
 	<meta name="_csrf" content="{{.CSRFToken}}" />
 	<meta name="_suburl" content="{{AppSubURL}}" />
-	
+
 	<!-- Open Graph Tags -->
 	{{if .PageIsAdmin}}
 	{{else if .PageIsUserProfile}}
@@ -30,8 +30,8 @@
 		<meta property="og:url" content="{{AppURL}}" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="{{AppName}}">
-		<meta property="og:description" content="Gogs is a painless self-hosted Git service.">
-		<meta property="og:image" content="{{AppURL}}img/gogs-lg.png" />
+		<meta property="og:description" content="Mokus Git">
+		<meta property="og:image" content="{{AppURL}}img/mokus-logo.png" />
 		<meta property="og:site_name" content="Gogs">
 	{{end}}
 
@@ -61,6 +61,8 @@
 	<!-- Stylesheet -->
 	<link rel="stylesheet" href="{{AppSubURL}}/css/semantic-2.2.10.min.css">
 	<link rel="stylesheet" href="{{AppSubURL}}/css/gogs.css?v={{MD5 AppVer}}">
+	<link rel="stylesheet" href="{{AppSubURL}}/css/devx.css?v={{MD5 AppVer}}">
+
 
 	<!-- JavaScript -->
 	<script src="{{AppSubURL}}/js/semantic-2.2.10.min.js"></script>
@@ -83,7 +85,7 @@
 						<div class="column">
 							<div class="ui top secondary menu">
 								<a class="item brand" href="{{AppSubURL}}/">
-									<img class="ui mini image" src="{{AppSubURL}}/img/favicon.png">
+									<img class="ui mini image" src="{{AppSubURL}}/img/mokus-logo.png">
 								</a>
 
 								{{if .IsLogged}}

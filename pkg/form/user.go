@@ -96,6 +96,22 @@ type UpdateProfile struct {
 	Email    string `binding:"Required;Email;MaxSize(254)"`
 	Website  string `binding:"Url;MaxSize(100)"`
 	Location string `binding:"MaxSize(50)"`
+	Skype		 string `binding:"MaxSize(50)"`
+}
+
+type Bank struct {
+	BeneficiaryName  string `binding:"Required"`
+	MobileNumber	string `binding:"Required"`
+	BankName		string `binding:"Required"`
+	BankCountry 	string `binding:"Required"`
+	BankCity			string `binding:"Required"`
+	BankBranch 		string `binding:"Required"`
+	SwiftCode			string `binding:"Required"`
+	AccountNumber		int `binding:"Required"`
+	IBAN		string `binding:"Required"`
+	AccountCurrency		string `binding:"Required;MaxSize(3)"`
+	IntermediaryBank	string
+	RoutingNumber		string
 }
 
 func (f *UpdateProfile) Validate(ctx *macaron.Context, errs binding.Errors) binding.Errors {
